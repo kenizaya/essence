@@ -42,7 +42,8 @@ const ChatInput = ({ isDisabled }: ChatInputProps) => {
                 className='absolute bottom-1.5 right-[8px]'
                 aria-label='send message'
                 type='submit'
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault()
                   addMessage()
 
                   textareaRef.current?.focus()

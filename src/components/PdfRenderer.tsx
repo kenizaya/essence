@@ -8,7 +8,7 @@ import { ChevronDown, ChevronUp, Loader2, RotateCw, Search } from 'lucide-react'
 import { useResizeDetector } from 'react-resize-detector'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -59,7 +59,11 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
     resolver: zodResolver(CustomPageValidator),
   })
 
-  const { width, ref } = useResizeDetector()
+  const { width, ref } = useResizeDetector({
+    handleHeight: false,
+    refreshMode: 'debounce',
+    refreshRate: 300,
+  })
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {
     setCurrPage(Number(page))
@@ -175,7 +179,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             >
               {isLoading && renderedScale ? (
                 <Page
-                  width={width ? width : 1}
+                  width={width ? width : 900}
                   pageNumber={currPage}
                   scale={scale}
                   rotate={rotation}
@@ -185,7 +189,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
 
               <Page
                 className={cn(isLoading ? 'hidden' : '')}
-                width={width ? width : 1}
+                width={width ? width : 900}
                 pageNumber={currPage}
                 scale={scale}
                 rotate={rotation}

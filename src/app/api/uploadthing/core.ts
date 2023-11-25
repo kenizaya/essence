@@ -5,7 +5,9 @@ import { createUploadthing, type FileRouter } from 'uploadthing/next'
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { PineconeStore } from 'langchain/vectorstores/pinecone'
+import { SupabaseVectorStore } from 'langchain/vectorstores/supabase'
 import { pinecone } from '@/lib/pinecone'
+import { supabaseClient } from '@/lib/supabase'
 
 const f = createUploadthing()
 
@@ -36,19 +38,47 @@ export const ourFileRouter = {
         const blob = await response.blob()
 
         const loader = new PDFLoader(blob)
-        const pageLevelDocs = await loader.load()
+        const docs = await loader.load()
+        docs.forEach((doc) => {
+          doc.metadata = { ...doc.metadata, fileId: createdFile.id }
+        })
 
-        const pagesAmt = pageLevelDocs.length
+        const pagesAmt = docs.length
 
-        const pineconeIndex = pinecone.Index('essence')
+        // const pineconeIndex = pinecone.Index('essence')
         const embeddings = new OpenAIEmbeddings({
           openAIApiKey: process.env.OPENAI_API_KEY,
         })
 
-        await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
-          pineconeIndex,
-          namespace: createdFile.id,
+        await SupabaseVectorStore.fromDocuments(docs, embeddings, {
+          client: supabaseClient,
+          tableName: 'documents',
+          queryName: 'match_documents',
         })
+
+        // const vectorStore = await SupabaseVectorStore.fromTexts(
+        //   ['Hello world', 'Bye bye', "What's this?"],
+        //   [{ id: 2 }, { id: 1 }, { id: 3 }],
+        //   new OpenAIEmbeddings(),
+        //   {
+        //     client: supabaseClient,
+        //     tableName: 'documents',
+        //     queryName: 'match_documents',
+        //   }
+        // )
+
+        // console.log(docs)
+
+        // const resultOne = await vectorStore.similaritySearch('Hello world', 1)
+
+        // console.log(resultOne)
+
+        // console.log(vectorStore)
+
+        // await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
+        //   pineconeIndex,
+        //   namespace: createdFile.id,
+        // })
 
         await db.file.update({
           data: {

@@ -1,26 +1,57 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
   relationMode = "prisma"
+  extensions   = [vector]
 }
 
 model User {
-  id      String    @id @unique
-  email   String    @unique
-  File    File[]
-  Message Message[]
+  id                     String    @id @unique
+  email                  String    @unique
+  stripeCustomerId       String?   @unique @map("stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map("stripe_subscription_id")
+  stripePriceId          String?   @unique @map("stripe_price_id")
+  stripeCurrentPeriodEnd String?   @unique @map("stripe_current_period_end")
+  File                   File[]
+  Message                Message[]
+}
 
-  stripeCustomerId       String? @unique @map(name: "stripe_customer_id")
-  stripeSubscriptionId   String? @unique @map(name: "stripe_subscription_id")
-  stripePriceId          String? @unique @map(name: "stripe_price_id")
-  stripeCurrentPeriodEnd String? @unique @map(name: "stripe_current_period_end")
+model File {
+  id           String       @id @default(cuid())
+  name         String
+  uploadStatus UploadStatus @default(PENDING)
+  url          String
+  key          String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  userId       String?
+  messages     Message[]
+  User         User?        @relation(fields: [userId], references: [id])
+}
+
+model Message {
+  id            String   @id @default(cuid())
+  text          String
+  isUserMessage Boolean
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String?
+  fileId        String?
+  User          User?    @relation(fields: [userId], references: [id])
+  File          File?    @relation(fields: [fileId], references: [id])
+}
+
+model documents {
+  id        BigInt                       @id @default(autoincrement())
+  content   String?
+  metadata  Json?
+  embedding Unsupported("vector(1536)")?
 }
 
 enum UploadStatus {
@@ -28,33 +59,4 @@ enum UploadStatus {
   PROCESSING
   FAILED
   SUCCESS
-}
-
-model File {
-  id   String @id @default(cuid())
-  name String
-
-  uploadStatus UploadStatus @default(PENDING)
-  messages     Message[]
-  url          String
-  key          String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?
-}
-
-model Message {
-  id   String @id @default(cuid())
-  text String @db.Text()
-
-  isUserMessage Boolean
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?
-  File      File?    @relation(fields: [fileId], references: [id])
-  fileId    String?
 }

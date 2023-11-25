@@ -45,6 +45,8 @@ const UploadDropzone = () => {
   return (
     <Dropzone
       multiple={false}
+      noClick={true}
+      noKeyboard={true}
       onDrop={async (acceptedFile) => {
         setIsUploading(true)
 

@@ -44,12 +44,14 @@ export const ChatContextProvider = ({ fileId, children }: Props) => {
     },
   })
 
-  const addMessage = () => sendMessage({ message })
+  const addMessage = () => {
+    sendMessage({ message })
+    setMessage('')
+  }
 
-  const handleInputChange =
-    () => (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      setMessage(e.target.value)
-    }
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value)
+  }
 
   return (
     <ChatContext.Provider

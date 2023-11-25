@@ -25,6 +25,8 @@ const Page = async ({ params }: PageProps) => {
     },
   })
 
+  console.log('file', file)
+
   if (!file) notFound()
 
   return (

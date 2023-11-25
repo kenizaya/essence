@@ -7,6 +7,8 @@ import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
 import { PineconeStore } from 'langchain/vectorstores/pinecone'
 import { NextRequest } from 'next/server'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
+import { SupabaseVectorStore } from 'langchain/vectorstores/supabase'
+import { supabaseClient } from '@/lib/supabase'
 
 export const POST = async (req: NextRequest) => {
   const body = await req.json()
@@ -37,17 +39,20 @@ export const POST = async (req: NextRequest) => {
     },
   })
 
-  const pineconeIndex = pinecone.Index('essence')
+  // const pineconeIndex = pinecone.Index('essence')
   const embeddings = new OpenAIEmbeddings({
     openAIApiKey: process.env.OPENAI_API_KEY,
   })
 
-  const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
-    pineconeIndex,
-    namespace: file.id,
+  const vectorStore = await SupabaseVectorStore.fromExistingIndex(embeddings, {
+    client: supabaseClient,
+    tableName: 'documents',
+    queryName: 'match_documents',
   })
 
-  const results = await vectorStore.similaritySearch(message, 4)
+  const results = await vectorStore.similaritySearch(message, 4, {
+    fileId: fileId,
+  })
 
   const prevMessages = await db.message.findMany({
     where: {
