@@ -1,12 +1,9 @@
 import { db } from '@/db'
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server'
 import { createUploadthing, type FileRouter } from 'uploadthing/next'
-
 import { PDFLoader } from 'langchain/document_loaders/fs/pdf'
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
-import { PineconeStore } from 'langchain/vectorstores/pinecone'
 import { SupabaseVectorStore } from 'langchain/vectorstores/supabase'
-import { pinecone } from '@/lib/pinecone'
 import { supabaseClient } from '@/lib/supabase'
 
 const f = createUploadthing()
@@ -45,7 +42,6 @@ export const ourFileRouter = {
 
         const pagesAmt = docs.length
 
-        // const pineconeIndex = pinecone.Index('essence')
         const embeddings = new OpenAIEmbeddings({
           openAIApiKey: process.env.OPENAI_API_KEY,
         })
