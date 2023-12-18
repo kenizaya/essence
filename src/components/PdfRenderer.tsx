@@ -8,7 +8,7 @@ import { ChevronDown, ChevronUp, Loader2, RotateCw, Search } from 'lucide-react'
 import { useResizeDetector } from 'react-resize-detector'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -36,6 +36,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
   const [scale, setScale] = useState(1)
   const [rotation, setRotation] = useState(0)
   const [renderedScale, setRenderedScale] = useState<number | null>(null)
+  const pdfRef = useRef(null)
 
   const isLoading = renderedScale !== scale
 
@@ -59,10 +60,11 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
     resolver: zodResolver(CustomPageValidator),
   })
 
-  const { width, ref } = useResizeDetector({
-    handleHeight: false,
-    refreshMode: 'debounce',
-    refreshRate: 300,
+  const { width } = useResizeDetector({
+    // handleHeight: false,
+    // refreshMode: 'debounce',
+    // refreshRate: 300,
+    targetRef: pdfRef,
   })
 
   const handlePageSubmit = ({ page }: TCustomPageValidator) => {
@@ -159,7 +161,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
 
       <div className='flex-1 w-full max-h-screen'>
         <SimpleBar autoHide={false} className='max-h-[calc(100vh-10rem)]'>
-          <div ref={ref}>
+          <div ref={pdfRef}>
             <Document
               loading={
                 <div className='flex justify-center'>
@@ -179,7 +181,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
             >
               {isLoading && renderedScale ? (
                 <Page
-                  width={width ? width : 900}
+                  width={width}
                   pageNumber={currPage}
                   scale={scale}
                   rotate={rotation}
@@ -189,7 +191,7 @@ const PdfRenderer = ({ url }: PdfRendererProps) => {
 
               <Page
                 className={cn(isLoading ? 'hidden' : '')}
-                width={width ? width : 900}
+                width={width}
                 pageNumber={currPage}
                 scale={scale}
                 rotate={rotation}
