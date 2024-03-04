@@ -176,10 +176,12 @@ const page = () => {
 
                     <p className='mt-6 flex items-baseline gap-x-1'>
                       <span className='text-4xl font-bold tracking-tight text-white'>
-                        {price !== 'custom' ? `$${price}` : 'Custom'}
+                        {plan.toLowerCase() !== 'custom'
+                          ? `$${price}`
+                          : 'Custom'}
                       </span>
                       <span className='text-sm font-semibold leading-6 text-gray-300'>
-                        {price !== 'custom' ? '/month' : null}
+                        {plan.toLowerCase() !== 'custom' ? '/month' : null}
                       </span>
                     </p>
                     <div className='pt-6'>
