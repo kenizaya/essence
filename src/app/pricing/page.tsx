@@ -75,16 +75,37 @@ const page = () => {
 
   return (
     <>
-      <MaxWidthWrapper classname='mb-8 mt-24 text-center max-w-5xl'>
-        <div className='mx-auto mb-10 sm:max-w-lg'>
-          <h1 className='text-6xl font-bold sm:text-7xl'>Pricing</h1>
-          <p className='mt-5 text-gray-600 sm:text-lg'>
+      <MaxWidthWrapper classname='mb-8 mt-24  text-center max-w-5xl'>
+        <div className='mx-auto mb-10 sm:max-w-7xl'>
+          <h2 className='mx-auto max-w-4xl text-center text-5xl font-bold tracking-tight dark:text-white'>
+            Simple pricing, no commitment
+          </h2>
+          <p className='mx-auto mt-4 max-w-2xl text-center text-lg leading-8 text-gray-600 dark:text-white/60'>
             Whether you&apos;re just trying out our service or need more,
             we&apos;ve got you covered.
           </p>
         </div>
 
-        <div className='pt-12 grid grid-cols-1 gap-10 lg:grid-cols-2'>
+        <div className='pt-12 relative grid grid-cols-1 gap-10 lg:grid-cols-2'>
+          <svg
+            viewBox='0 0 1208 1024'
+            aria-hidden='true'
+            className='absolute -bottom-48 left-1/2 h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-16 lg:bottom-auto lg:translate-y-0'
+          >
+            <ellipse
+              cx={604}
+              cy={512}
+              fill='url(#d25c25d4-6d43-4bf9-b9ac-1842a30a4867)'
+              rx={604}
+              ry={512}
+            />
+            <defs>
+              <radialGradient id='d25c25d4-6d43-4bf9-b9ac-1842a30a4867'>
+                <stop stopColor='#7775D6' />
+                <stop offset={1} stopColor='#E935C1' />
+              </radialGradient>
+            </defs>
+          </svg>
           <TooltipProvider>
             {pricingItems.map(({ plan, quota, tagline, features }) => {
               const price =
