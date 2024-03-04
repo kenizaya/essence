@@ -25,4 +25,17 @@ export const PLANS = [
       },
     },
   },
+  {
+    name: 'Custom',
+    slug: 'custom',
+    quota: 0,
+    pagesPerPdf: 0,
+    price: {
+      amount: 'custom',
+      priceIds: {
+        test: '',
+        production: '',
+      },
+    },
+  },
 ]

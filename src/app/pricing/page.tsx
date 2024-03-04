@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/tooltip'
 import React from 'react'
 import { ArrowRight, Check, HelpCircle, Minus } from 'lucide-react'
-import { buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import UpgradeButton from '@/components/UpgradeButton'
 
@@ -22,22 +22,21 @@ const page = () => {
     {
       plan: 'Free',
       tagline: 'For small side projects.',
+      mostPopular: false,
       quota: 10,
       features: [
+        { text: '10 PDFs per month' },
         {
           text: '5 pages per PDF',
-          footnote: 'The maximum amount of pages per PDF-file.',
         },
         {
           text: '4MB file size limit',
-          footnote: 'The maximum file size of a single PDF file.',
         },
         {
           text: 'Mobile-friendly interface',
         },
         {
           text: 'Higher-quality responses',
-          footnote: 'Better algorithmic responses for enhanced content quality',
           negative: true,
         },
         {
@@ -48,16 +47,17 @@ const page = () => {
     },
     {
       plan: 'Pro',
+      mostPopular: true,
       tagline: 'For larger projects with higher needs.',
       quota: PLANS.find((p) => p.slug === 'pro')!.quota,
       features: [
+        { text: '50 PDFs per month' },
+
         {
           text: '25 pages per PDF',
-          footnote: 'The maximum amount of pages per PDF-file.',
         },
         {
           text: '16MB file size limit',
-          footnote: 'The maximum file size of a single PDF file.',
         },
         {
           text: 'Mobile-friendly interface',
@@ -71,160 +71,220 @@ const page = () => {
         },
       ],
     },
+    {
+      plan: 'Custom',
+      mostPopular: false,
+      tagline: 'Looking for something more?',
+      quota: 'Unlimited',
+      features: [
+        { text: 'Unlimited PDFs per month' },
+
+        {
+          text: 'Unlimited pages per PDF',
+        },
+        {
+          text: 'No file size limit',
+        },
+        {
+          text: 'Mobile-friendly interface',
+        },
+        {
+          text: 'Higher-quality responses',
+          footnote: 'Better algorithmic responses for enhanced content quality',
+        },
+        {
+          text: 'Dedicated support',
+        },
+      ],
+    },
   ]
 
   return (
     <>
-      <MaxWidthWrapper classname='mb-8 mt-24  text-center max-w-5xl'>
-        <div className='mx-auto mb-10 sm:max-w-7xl'>
-          <h2 className='mx-auto max-w-4xl text-center text-5xl font-bold tracking-tight dark:text-white'>
-            Simple pricing, no commitment
-          </h2>
+      <MaxWidthWrapper classname='mb-8 py-24 sm:py-32'>
+        <div className='mx-auto mb-24 sm:max-w-7xl'>
+          <div className='mx-auto max-w-4xl text-center'>
+            <h2 className='text-base font-semibold leading-7 text-indigo-400'>
+              Pricing
+            </h2>
+            <p className='mx-auto max-w-4xl text-center text-5xl font-bold tracking-tight dark:text-white'>
+              Simple pricing, no commitment
+            </p>
+          </div>
           <p className='mx-auto mt-4 max-w-2xl text-center text-lg leading-8 text-gray-600 dark:text-white/60'>
             Whether you&apos;re just trying out our service or need more,
             we&apos;ve got you covered.
           </p>
         </div>
 
-        <div className='pt-12 relative grid grid-cols-1 gap-10 lg:grid-cols-2'>
-          <svg
-            viewBox='0 0 1208 1024'
-            aria-hidden='true'
-            className='absolute -bottom-48 left-1/2 h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-16 lg:bottom-auto lg:translate-y-0'
-          >
-            <ellipse
-              cx={604}
-              cy={512}
-              fill='url(#d25c25d4-6d43-4bf9-b9ac-1842a30a4867)'
-              rx={604}
-              ry={512}
-            />
-            <defs>
-              <radialGradient id='d25c25d4-6d43-4bf9-b9ac-1842a30a4867'>
-                <stop stopColor='#7775D6' />
-                <stop offset={1} stopColor='#E935C1' />
-              </radialGradient>
-            </defs>
-          </svg>
-          <TooltipProvider>
-            {pricingItems.map(({ plan, quota, tagline, features }) => {
-              const price =
-                PLANS.find((p) => p.slug === plan.toLowerCase())?.price
-                  .amount || 0
+        <TooltipProvider>
+          <div className='relative'>
+            <svg
+              viewBox='0 0 1208 1024'
+              aria-hidden='true'
+              className='absolute -bottom-48 left-1/2 h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-36 lg:bottom-auto lg:translate-y-0'
+            >
+              <ellipse
+                cx={604}
+                cy={512}
+                fill='url(#d25c25d4-6d43-4bf9-b9ac-1842a30a4867)'
+                rx={604}
+                ry={512}
+              />
+              <defs>
+                <radialGradient id='d25c25d4-6d43-4bf9-b9ac-1842a30a4867'>
+                  <stop stopColor='#7775D6' />
+                  <stop offset={1} stopColor='#E935C1' />
+                </radialGradient>
+              </defs>
+            </svg>
+            <div className='isolate mx-auto mt-10 grid gap-3 max-w-md grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+              {pricingItems.map(({ plan, tagline, features, mostPopular }) => {
+                const price =
+                  PLANS.find((p) => p.slug === plan.toLowerCase())?.price
+                    .amount || 0
 
-              return (
-                <div
-                  key={plan}
-                  className={cn('relative rounded-2xl bg-white shadow-lg', {
-                    'border-2 border-blue-600 shadow-blue-200': plan === 'pro',
-                    'border border-gray-200': plan !== 'pro',
-                  })}
-                >
-                  {plan.toLowerCase() === 'pro' && (
-                    <div className='absolute -top-5 left-0 right-0 mx-auto w-32 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 px-3 py-2 text-sm font-medium text-white'>
-                      Upgrade
-                    </div>
-                  )}
-                  <div className='p-5'>
-                    <h3 className='my-3 text-center font-display text-3xl font-bold'>
-                      {plan}
-                    </h3>
-
-                    <p className='text-gray-500'>{tagline}</p>
-                    <p className='my-5 font-display text-6xl font-semibold'>
-                      ${price}
-                    </p>
-                    <p className='text-gray-500'>per month</p>
-                  </div>
-
-                  <div className='flex h-20 items-center justify-center border-b border-t border-gray-50'>
-                    <div className='flex items-center space-x-1'>
-                      <p>{quota.toLocaleString()} PDFs/mo</p>
-
-                      <Tooltip delayDuration={300}>
-                        <TooltipTrigger className='cursor-default ml-1.5'>
-                          <HelpCircle className='h-4 w-4 text-zinc-500' />
-                        </TooltipTrigger>
-                        <TooltipContent className='w-80 p-2'>
-                          How many PDFs you can upload per month.
-                        </TooltipContent>
-                      </Tooltip>
-                    </div>
-                  </div>
-
-                  <ul className='my-10 space-y-5 px-8'>
-                    {features.map(({ text, footnote, negative }) => (
-                      <li key={text} className='flex space-x-5'>
-                        <div className='flex-shrink-0'>
-                          {negative ? (
-                            <Minus className='h-6 w-6 text-gray-300' />
-                          ) : (
-                            <Check className='h-6 w-6 text-blue-600' />
-                          )}
-                        </div>
-                        {footnote ? (
-                          <div className='flex items-center space-x-1'>
-                            <p
-                              className={cn('text-gray-400', {
-                                'text-gray-600': negative,
-                              })}
-                            >
-                              {text}
-                            </p>
-
-                            <Tooltip delayDuration={300}>
-                              <TooltipTrigger className='cursor-default ml-1.5'>
-                                <HelpCircle className='h-4 w-4 text-zinc-500' />
-                              </TooltipTrigger>
-                              <TooltipContent className='w-80 p-2'>
-                                {footnote}
-                              </TooltipContent>
-                            </Tooltip>
-                          </div>
-                        ) : (
-                          <p
-                            className={cn('text-gray-400', {
-                              'text-gray-600': negative,
-                            })}
-                          >
-                            {text}
-                          </p>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className='border-t border-gray-200' />
-                  <div className='p-5'>
-                    {plan.toLowerCase() === 'free' ? (
-                      <Link
-                        href={user ? '/dashboard' : '/sign-in'}
-                        className={buttonVariants({
-                          className: 'w-full',
-                          variant: 'secondary',
-                        })}
-                      >
-                        {user ? 'Upgrade now' : 'Sign up'}
-                        <ArrowRight className='h-5 w-5 ml-1.5' />
-                      </Link>
-                    ) : user ? (
-                      <UpgradeButton />
-                    ) : (
-                      <Link
-                        href='/sign-in'
-                        className={buttonVariants({
-                          className: 'w-full',
-                        })}
-                      >
-                        {user ? 'Upgrade now' : 'Sign up'}
-                        <ArrowRight className='h-5 w-5 ml-1.5' />
-                      </Link>
+                return (
+                  <div
+                    key={plan}
+                    className={cn(
+                      mostPopular
+                        ? 'ring-2 ring-indigo-500 scale-105'
+                        : 'ring-1 ring-white/10',
+                      'rounded-3xl bg-gray-900/75 p-8 relative xl:p-10'
                     )}
+                  >
+                    {mostPopular ? (
+                      <div className='absolute bg-white/5 inset-0 rounded-3xl -z-10' />
+                    ) : null}
+                    <div className='flex items-center justify-between gap-x-4'>
+                      <h3
+                        id={plan}
+                        className='text-lg font-semibold leading-8 text-white'
+                      >
+                        {plan}
+                      </h3>
+                      {mostPopular ? (
+                        <p className='rounded-full bg-indigo-500 px-2.5 py-1 text-xs font-semibold leading-5 text-white'>
+                          Most popular
+                        </p>
+                      ) : null}
+                    </div>
+                    <p className='mt-4 text-sm leading-6 text-gray-300'>
+                      {tagline}
+                    </p>
+
+                    <p className='mt-6 flex items-baseline gap-x-1'>
+                      <span className='text-4xl font-bold tracking-tight text-white'>
+                        {price !== 'custom' ? `$${price}` : 'Custom'}
+                      </span>
+                      <span className='text-sm font-semibold leading-6 text-gray-300'>
+                        {price !== 'custom' ? '/month' : null}
+                      </span>
+                    </p>
+                    <div className='pt-6'>
+                      {plan.toLowerCase() === 'custom' ? (
+                        <Link
+                          href='mailto:pshdotgg@gmail.com'
+                          className={buttonVariants({
+                            className: 'w-full',
+                            variant: 'secondary',
+                          })}
+                        >
+                          Contact Sales
+                        </Link>
+                      ) : plan.toLowerCase() !== 'pro' ? (
+                        <Link
+                          href={user ? '/dashboard' : '/sign-up'}
+                          className={buttonVariants({
+                            className: 'w-full flex items-center',
+                            variant: 'secondary',
+                          })}
+                        >
+                          {user ? 'Upgrade now' : 'Sign up'}
+                          <ArrowRight className='h-5 w-5 ml-1.5' />
+                        </Link>
+                      ) : user ? (
+                        <UpgradeButton />
+                      ) : (
+                        <Link
+                          href='/sign-up'
+                          className={buttonVariants({
+                            className: 'w-full flex items-center',
+                          })}
+                        >
+                          {user ? 'Upgrade now' : 'Sign up'}
+                          <ArrowRight className='h-5 w-5 ml-1.5' />
+                        </Link>
+                      )}
+                    </div>
+
+                    <ul
+                      role='list'
+                      className='mt-8 space-y-3 text-sm leading-6 text-gray-300 xl:mt-10'
+                    >
+                      {features.map(
+                        ({
+                          text,
+                          footnote,
+                          negative,
+                        }: {
+                          text: string
+                          footnote?: string
+                          negative?: boolean
+                        }) => (
+                          <li key={text} className='flex gap-x-3'>
+                            <div className='flex-shrink-0'>
+                              {negative ? (
+                                <Minus
+                                  className='h-6 w-6 text-gray-300'
+                                  aria-hidden='true'
+                                />
+                              ) : (
+                                <Check
+                                  className='h-6 w-5 flex-none text-white'
+                                  aria-hidden='true'
+                                />
+                              )}
+                            </div>
+                            {footnote ? (
+                              <div className='flex items-center space-x-1'>
+                                <p
+                                  className={cn('text-gray-300', {
+                                    'text-gray-600': negative,
+                                  })}
+                                >
+                                  {text}
+                                </p>
+
+                                <Tooltip delayDuration={300}>
+                                  <TooltipTrigger className='cursor-default ml-1.5'>
+                                    <HelpCircle className='h-4 w-4 text-zinc-500' />
+                                  </TooltipTrigger>
+                                  <TooltipContent className='w-80 p-2'>
+                                    {footnote}
+                                  </TooltipContent>
+                                </Tooltip>
+                              </div>
+                            ) : (
+                              <p
+                                className={cn('text-gray-300', {
+                                  'text-gray-600': negative,
+                                })}
+                              >
+                                {text}
+                              </p>
+                            )}
+                          </li>
+                        )
+                      )}
+                    </ul>
                   </div>
-                </div>
-              )
-            })}
-          </TooltipProvider>
-        </div>
+                )
+              })}
+            </div>
+          </div>
+        </TooltipProvider>
       </MaxWidthWrapper>
     </>
   )
