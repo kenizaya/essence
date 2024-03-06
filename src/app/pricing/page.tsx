@@ -122,7 +122,7 @@ const page = () => {
             <svg
               viewBox='0 0 1208 1024'
               aria-hidden='true'
-              className='absolute -bottom-48 left-1/2 h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-36 lg:bottom-auto lg:translate-y-0'
+              className='absolute -bottom-48 max-lg:hidden left-1/2 h-[20rem] sm:h-[24rem] lg:h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-36 lg:bottom-auto lg:translate-y-0'
             >
               <ellipse
                 cx={604}
@@ -138,7 +138,7 @@ const page = () => {
                 </radialGradient>
               </defs>
             </svg>
-            <div className='isolate mx-auto mt-10 grid gap-3 max-w-md grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+            <div className='isolate mx-auto mt-10 grid gap-5 lg:gap-3 max-w-md grid-cols-1 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
               {pricingItems.map(({ plan, tagline, features, mostPopular }) => {
                 const price =
                   PLANS.find((p) => p.slug === plan.toLowerCase())?.price
@@ -149,7 +149,7 @@ const page = () => {
                     key={plan}
                     className={cn(
                       mostPopular
-                        ? 'ring-2 ring-indigo-500 scale-105'
+                        ? 'ring-2 ring-indigo-500 lg:scale-105'
                         : 'ring-1 ring-white/10',
                       'rounded-3xl bg-gray-900/75 p-8 relative xl:p-10'
                     )}
