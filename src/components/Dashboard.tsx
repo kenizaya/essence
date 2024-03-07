@@ -32,7 +32,7 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
 
   return (
     <main className='mx-auto max-w-7xl md:p-10 md:px-20 p-5'>
-      <div className='mt-8 flex flex-row items-start justify-between gap-4 border-b border-gray-200 pb-5 items-center sm:gap-0'>
+      <div className='mt-8 flex flex-row justify-between gap-4 border-b border-gray-200 pb-5 items-center sm:gap-0'>
         <h1 className='mb-3 font-bold text-5xl dark:text-neutral-100 text-gray-900'>
           My Files
         </h1>

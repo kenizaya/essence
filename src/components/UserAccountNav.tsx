@@ -53,12 +53,16 @@ const UserAccountNav = async ({
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className='bg-white' align='end'>
+      <DropdownMenuContent className='bg-white dark:bg-gray-900' align='end'>
         <div className='flex items-center justify-start gap-2 p-2'>
           <div className='flex flex-col space-y-0.5 leading-none'>
-            {name && <p className='font-medium text-sm text-black'>{name}</p>}
+            {name && (
+              <p className='font-medium text-sm dark:text-white text-black'>
+                {name}
+              </p>
+            )}
             {email && (
-              <p className='w-[200px] truncate text-xs text-zinc-700'>
+              <p className='w-[200px] select-all truncate text-xs dark:text-neutral-300 text-zinc-700'>
                 {email}
               </p>
             )}
@@ -68,22 +72,30 @@ const UserAccountNav = async ({
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link href='/dashboard'>Dashboard</Link>
+          <Link
+            href='/dashboard'
+            className='cursor-pointer hover:bg-gray-900/70'
+          >
+            Dashboard
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
           {subscriptionPlan?.isSubscribed ? (
             <Link href='/dashboard/billing'>Manage Subscription</Link>
           ) : (
-            <Link href='/pricing'>
-              Upgrade <Gem className='text-blue-600 h-4 w-4 ml-1.5' />
+            <Link
+              href='/pricing'
+              className='cursor-pointer hover:bg-gray-900/70'
+            >
+              Upgrade <Gem className='text-indigo-500 h-4 w-4 ml-1.5' />
             </Link>
           )}
         </DropdownMenuItem>
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className='cursor-pointer'>
+        <DropdownMenuItem className='cursor-pointer hover:bg-gray-900/70'>
           <LogoutLink>Log out</LogoutLink>
         </DropdownMenuItem>
       </DropdownMenuContent>
