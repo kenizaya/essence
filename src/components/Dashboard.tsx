@@ -96,7 +96,20 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
             ))}
         </ul>
       ) : isLoading ? (
-        <Skeleton height={100} className='my-2' count={3} />
+        <>
+          <div className='hidden dark:block'>
+            <Skeleton
+              height={100}
+              baseColor='rgb(31,41,55)'
+              highlightColor='rgb(17,24,39)'
+              className='my-2 '
+              count={3}
+            />
+          </div>
+          <div className='dark:hidden'>
+            <Skeleton height={100} className='my-2' count={3} />
+          </div>
+        </>
       ) : (
         <div className='mt-16 flex flex-col items-center gap-2'>
           <Ghost className='h-8 w-8 dark:text-neutral-300 text-zinc-800' />
