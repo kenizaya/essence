@@ -82,7 +82,7 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
                   <Button
                     onClick={() => deleteFile({ id: file.id })}
                     size='sm'
-                    className='w-full'
+                    className='w-full dark:bg-red-800 dark:hover:bg-red-700'
                     variant='destructive'
                   >
                     {currentDeletingFile === file.id ? (
