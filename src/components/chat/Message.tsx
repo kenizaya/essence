@@ -44,8 +44,9 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
         >
           <div
             className={cn('px-4 py-2 rounded-lg inline-block', {
-              'bg-blue-600 text-white': message.isUserMessage,
-              'bg-gray-200 text-gray-900': !message.isUserMessage,
+              'bg-indigo-600 text-white': message.isUserMessage,
+              'bg-gray-200 dark:bg-gray-700 dark:text-neutral-200 text-gray-900':
+                !message.isUserMessage,
               'rounded-br-none':
                 !isNextMessageSamePerson && message.isUserMessage,
               'rounded-bl-none':
@@ -66,8 +67,8 @@ const Message = forwardRef<HTMLDivElement, MessageProps>(
             {message.id !== 'loading-message' ? (
               <div
                 className={cn('text-xs select-none mt-2 -full text-right', {
-                  'text-zinc-500': !message.isUserMessage,
-                  'text-blue-300': message.isUserMessage,
+                  'text-zinc-500 dark:text-neutral-300': !message.isUserMessage,
+                  'text-indigo-300 dark:text-indigo-200': message.isUserMessage,
                 })}
               >
                 {format(new Date(message.createdAt), 'HH:mm')}
