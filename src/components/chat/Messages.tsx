@@ -84,12 +84,20 @@ const Messages = ({ fileId }: MessagesProps) => {
             )
         })
       ) : isLoading ? (
-        <div className='w-full flex flex-col gap-2'>
-          <Skeleton className='h-16' />
-          <Skeleton className='h-16' />
-          <Skeleton className='h-16' />
-          <Skeleton className='h-16' />
-        </div>
+        <>
+          <div className='hidden dark:block'>
+            <Skeleton
+              height={64}
+              baseColor='rgb(31,41,55)'
+              highlightColor='rgb(17,24,39)'
+              className='my-2 '
+              count={4}
+            />
+          </div>
+          <div className='dark:hidden'>
+            <Skeleton height={64} className='my-2' count={4} />
+          </div>
+        </>
       ) : (
         <div className='flex flex-col flex-1 items-center justify-center gap-2'>
           <MessageSquare className='h-8 w-8 text-indigo-500' />
