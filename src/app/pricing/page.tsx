@@ -122,7 +122,7 @@ const page = () => {
             <svg
               viewBox='0 0 1208 1024'
               aria-hidden='true'
-              className='absolute -bottom-48 max-lg:hidden left-1/2 h-[20rem] sm:h-[24rem] lg:h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-36 lg:bottom-auto lg:translate-y-0'
+              className='absolute -bottom-48 max-lg:hidden left-1/2 h-[20rem] sm:h-[24rem] lg:h-[55rem] xl:h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-36 lg:bottom-auto lg:translate-y-0'
             >
               <ellipse
                 cx={604}
