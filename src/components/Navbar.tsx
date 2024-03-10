@@ -9,22 +9,25 @@ import {
 import { ArrowRight } from 'lucide-react'
 import UserAccountNav from './UserAccountNav'
 import MobileNav from './MobileNav'
+import { DarkModeToggle } from './DarkModeToggle'
 
 const Navbar = () => {
   const { getUser } = getKindeServerSession()
   const user = getUser()
 
   return (
-    <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b dark:bg-gray-900/75 dark:border-white/10 border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
+    <nav className='sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-t dark:bg-gray-900/75 dark:border-white/10 border-gray-200 bg-white/75 backdrop-blur-lg transition-all'>
       <MaxWidthWrapper>
-        <div className='flex h-14 max-md:px-3 items-center justify-between border-b dark:border-white/10 dark:bg-gray-900/75 border-zinc-200'>
+        <div className='flex h-14 max-md:px-3 items-center justify-between border-b border-t dark:border-white/10  border-zinc-200'>
           <Link href='/' className='flex z-40 font-semibold'>
             <span>essence.</span>
           </Link>
 
           <MobileNav isAuth={!!user} />
 
-          <div className='hidden items-center space-x-4 sm:flex'>
+          <div className='hidden items-center space-x-3 sm:flex'>
+            <DarkModeToggle />
+
             {!user ? (
               <>
                 <Link

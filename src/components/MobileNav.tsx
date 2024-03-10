@@ -4,6 +4,7 @@ import { ArrowRight, Menu } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { DarkModeToggle } from './DarkModeToggle'
 
 const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -23,10 +24,14 @@ const MobileNav = ({ isAuth }: { isAuth: boolean }) => {
 
   return (
     <div className='sm:hidden'>
-      <Menu
-        onClick={toggleOpen}
-        className='relative z-50 h-5 w-5 text-zinc-700'
-      />
+      <div className='flex items-center gap-2'>
+        <DarkModeToggle />
+
+        <Menu
+          onClick={toggleOpen}
+          className='relative z-50 h-5 w-5 dark:text-neutral-300 text-zinc-700'
+        />
+      </div>
 
       {isOpen ? (
         <div className='fixed animate-in slide-in-from-top-5 fade-in-20 inset-0 z-0 w-full'>

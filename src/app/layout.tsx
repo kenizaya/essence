@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Providers from '@/components/Providers'
 import { Toaster } from '@/components/ui/toaster'
+import { ThemeProvider } from '@/components/ThemeProvider'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 import 'simplebar-react/dist/simplebar.min.css'
@@ -24,9 +25,15 @@ export default function RootLayout({
         <body
           className={cn('min-h-screen font-sans antialiased ', inter.className)}
         >
-          <Toaster />
-          <Navbar />
-          {children}
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='dark'
+            disableTransitionOnChange
+          >
+            <Toaster />
+            <Navbar />
+            {children}
+          </ThemeProvider>
         </body>
       </Providers>
     </html>

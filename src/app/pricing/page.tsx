@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/tooltip'
 import React from 'react'
 import { ArrowRight, Check, HelpCircle, Minus } from 'lucide-react'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
 import UpgradeButton from '@/components/UpgradeButton'
 
@@ -150,8 +150,8 @@ const page = () => {
                     className={cn(
                       mostPopular
                         ? 'ring-2 ring-indigo-500 lg:scale-105'
-                        : 'ring-1 ring-white/10',
-                      'rounded-3xl bg-gray-900/75 p-8 relative xl:p-10'
+                        : 'dark:ring-1 ring-2 dark:ring-white/10',
+                      'rounded-3xl dark:bg-gray-900/75 bg-white/95 p-8 relative xl:p-10'
                     )}
                   >
                     {mostPopular ? (
@@ -160,7 +160,7 @@ const page = () => {
                     <div className='flex items-center justify-between gap-x-4'>
                       <h3
                         id={plan}
-                        className='text-lg font-semibold leading-8 text-white'
+                        className='text-lg font-semibold leading-8 dark:text-white'
                       >
                         {plan}
                       </h3>
@@ -170,17 +170,17 @@ const page = () => {
                         </p>
                       ) : null}
                     </div>
-                    <p className='mt-4 text-sm leading-6 text-gray-300'>
+                    <p className='mt-4 text-sm leading-6 dark:text-gray-300'>
                       {tagline}
                     </p>
 
                     <p className='mt-6 flex items-baseline gap-x-1'>
-                      <span className='text-4xl font-bold tracking-tight text-white'>
+                      <span className='text-4xl font-bold tracking-tight dark:text-white'>
                         {plan.toLowerCase() !== 'custom'
                           ? `$${price}`
                           : 'Custom'}
                       </span>
-                      <span className='text-sm font-semibold leading-6 text-gray-300'>
+                      <span className='text-sm font-semibold leading-6 dark:text-gray-300'>
                         {plan.toLowerCase() !== 'custom' ? '/month' : null}
                       </span>
                     </p>
@@ -223,7 +223,7 @@ const page = () => {
 
                     <ul
                       role='list'
-                      className='mt-8 space-y-3 text-sm leading-6 text-gray-300 xl:mt-10'
+                      className='mt-8 space-y-3 text-sm leading-6 dark:text-gray-300 xl:mt-10'
                     >
                       {features.map(
                         ({
@@ -239,12 +239,12 @@ const page = () => {
                             <div className='flex-shrink-0'>
                               {negative ? (
                                 <Minus
-                                  className='h-6 w-6 text-gray-300'
+                                  className='h-6 w-6 dark:text-gray-300'
                                   aria-hidden='true'
                                 />
                               ) : (
                                 <Check
-                                  className='h-6 w-5 flex-none text-white'
+                                  className='h-6 w-5 flex-none dark:text-white'
                                   aria-hidden='true'
                                 />
                               )}
@@ -252,9 +252,13 @@ const page = () => {
                             {footnote ? (
                               <div className='flex items-center space-x-1'>
                                 <p
-                                  className={cn('text-gray-300', {
-                                    'text-gray-600': negative,
-                                  })}
+                                  className={cn(
+                                    'dark:text-gray-300 text-zinc-700',
+                                    {
+                                      'dark:text-gray-600 text-zinc-700':
+                                        negative,
+                                    }
+                                  )}
                                 >
                                   {text}
                                 </p>
@@ -270,9 +274,13 @@ const page = () => {
                               </div>
                             ) : (
                               <p
-                                className={cn('text-gray-300', {
-                                  'text-gray-600': negative,
-                                })}
+                                className={cn(
+                                  'dark:text-gray-300 text-zinc-700',
+                                  {
+                                    'dark:text-gray-600 text-zinc-700':
+                                      negative,
+                                  }
+                                )}
                               >
                                 {text}
                               </p>

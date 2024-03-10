@@ -18,7 +18,7 @@ export default function Home() {
           Chat with your <span className='text-indigo-400'>documents</span> in
           seconds.
         </h1>
-        <p className='mt-5 max-w-prose text-gray-300 leading-8 sm:text-lg'>
+        <p className='mt-5 max-w-prose dark:text-neutral-300 text-zinc-700 leading-8 sm:text-lg'>
           Essence allows you to have conversations with your PDF.{' '}
         </p>
 
