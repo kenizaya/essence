@@ -104,9 +104,9 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
               </div>
 
               {acceptedFiles && acceptedFiles[0] ? (
-                <div className='max-w-xs bg-white flex items-center rounded-md overflow-hidden outline outline-[1px] outline-zinc-200 divide-x divide-zinc-200'>
+                <div className='max-w-xs dark:bg-gray-900 bg-white flex items-center rounded-md overflow-hidden outline outline-[1px] dark:outline-gray-500/50 dark:divide-gray-500/50 outline-zinc-200 divide-x divide-zinc-200'>
                   <div className='px-3 py-2 h-full grid place-items-center'>
-                    <File className='h-4 w-4 text-blue-500' />
+                    <File className='h-4 w-4 text-indigo-500' />
                   </div>
                   <div className='px-3 py-2 h-full text-sm truncate'>
                     {acceptedFiles[0].name}
@@ -121,7 +121,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
                     indicatorColor={
                       uploadProgress === 100 ? 'bg-green-500' : ''
                     }
-                    className='h-1 w-full bg-zinc-200'
+                    className='h-1 w-full dark:bg- bg-zinc-200'
                   />
                   {uploadProgress === 100 ? (
                     <div className='flex gap-1 items-center justify-center text-sm text-zinc-700 text-center pt-2'>
