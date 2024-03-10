@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 import { RegisterLink } from '@kinde-oss/kinde-auth-nextjs/server'
+import { GeminiEffect } from '@/components/GeminiEffect'
 
 export default function Home() {
   return (
@@ -93,9 +94,11 @@ export default function Home() {
         </div>
       </div>
 
+      <GeminiEffect />
+
       {/* Features */}
-      <div className='mx-auto mb-32 mt-32 max-w-5xl sm:mt-56'>
-        <div className='mb-12 px-6 lg:px-8'>
+      <div className='mx-auto mb-32 mt-32 max-w-5xl sm:mt-5'>
+        {/* <div className='mb-12 px-6 lg:px-8'>
           <div className='mx-auto max-w-2xl sm:text-center'>
             <h2 className='mt-2 font-bold text-4xl dark:text-white text-gray-900 sm:text-5xl'>
               Start chatting in seconds
@@ -105,7 +108,7 @@ export default function Home() {
               Chatting with your PDF has never been easier.
             </p>
           </div>
-        </div>
+        </div> */}
 
         {/* Steps */}
 
