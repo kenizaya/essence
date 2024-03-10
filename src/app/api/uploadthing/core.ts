@@ -7,6 +7,7 @@ import { SupabaseVectorStore } from 'langchain/vectorstores/supabase'
 import { supabaseClient } from '@/lib/supabase'
 import { getUserSubscriptionPlan } from '@/lib/stripe'
 import { PLANS } from '@/config/stripe'
+import { TRPCError } from '@trpc/server'
 
 const f = createUploadthing()
 
@@ -81,6 +82,8 @@ const onUploadComplete = async ({
           id: createdFile.id,
         },
       })
+
+      throw new Error('LIMIT_EXCEEDED')
     }
 
     const embeddings = new OpenAIEmbeddings({
@@ -93,30 +96,6 @@ const onUploadComplete = async ({
       queryName: 'match_documents',
     })
 
-    // const vectorStore = await SupabaseVectorStore.fromTexts(
-    //   ['Hello world', 'Bye bye', "What's this?"],
-    //   [{ id: 2 }, { id: 1 }, { id: 3 }],
-    //   new OpenAIEmbeddings(),
-    //   {
-    //     client: supabaseClient,
-    //     tableName: 'documents',
-    //     queryName: 'match_documents',
-    //   }
-    // )
-
-    // console.log(docs)
-
-    // const resultOne = await vectorStore.similaritySearch('Hello world', 1)
-
-    // console.log(resultOne)
-
-    // console.log(vectorStore)
-
-    // await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
-    //   pineconeIndex,
-    //   namespace: createdFile.id,
-    // })
-
     await db.file.update({
       data: {
         uploadStatus: 'SUCCESS',
@@ -126,7 +105,6 @@ const onUploadComplete = async ({
       },
     })
   } catch (err) {
-    console.log(err)
     await db.file.update({
       data: {
         uploadStatus: 'FAILED',
