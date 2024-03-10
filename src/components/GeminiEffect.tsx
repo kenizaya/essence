@@ -23,16 +23,16 @@ export const GoogleGeminiEffect = ({
 }) => {
   return (
     <div className={cn('sticky top-80 ', className)}>
-      <p className='text-3xl sm:text-5xl lg:text-7xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-300'>
+      <p className='text-3xl sm:text-5xl lg:text-7xl font-normal pb-4 text-center bg-clip-text text-transparent bg-gradient-to-b from-zinc-700 to-zinc-900 dark:from-neutral-100 dark:to-neutral-300'>
         {title ||
           `Start chatting in seconds
 `}
       </p>
-      <p className='text-sm sm:text-lg lg:text-xl font-normal text-center text-neutral-400 mt-4 max-w-lg mx-auto'>
+      <p className='text-sm sm:text-lg lg:text-xl font-normal text-center text-zinc-700 dark:text-neutral-400 mt-4 max-w-lg mx-auto'>
         {description || `Chatting with your PDF has never been easier.`}
       </p>
       <div className='w-full h-[890px] -top-60 md:-top-40 flex items-center justify-center bg-red-transparent absolute '>
-        <button className='font-semibold bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-black text-xs  w-fit mx-auto '>
+        <button className='border-2 border-indigo-500 dark:border-none bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-gray-950 dark:text-black text-xs  w-fit mx-auto '>
           essence
         </button>
       </div>
@@ -177,7 +177,7 @@ export const GeminiEffect = () => {
 
   return (
     <div
-      className='h-[300vh] w-full dark:border-t dark:border-white/[0.1] rounded-md relative pt-40 overflow-clip'
+      className='h-[300vh] w-full border-t border-white/10 rounded-md relative pt-40 overflow-clip'
       ref={ref}
     >
       <GoogleGeminiEffect
