@@ -71,8 +71,8 @@ export default function Home() {
                     alt='product preview'
                     width={1364}
                     height={866}
-                    quality={100}
-                    className='rounded-md bg-white p-2 sm:p-8 md:p-20 shadow-2xl ring-1 ring-gray-900/10'
+                    quality={75}
+                    className='rounded-md dark:bg-gray-950/30 bg-white p-2 sm:p-8 md:p-20 shadow-2xl ring-1 ring-gray-900/10'
                   />
                 </div>
               </div>
@@ -95,26 +95,12 @@ export default function Home() {
       </div>
 
       <GeminiEffect />
-
-      {/* Features */}
-      <div className='mx-auto mb-32 mt-32 max-w-5xl sm:mt-5'>
-        {/* <div className='mb-12 px-6 lg:px-8'>
-          <div className='mx-auto max-w-2xl sm:text-center'>
-            <h2 className='mt-2 font-bold text-4xl dark:text-white text-gray-900 sm:text-5xl'>
-              Start chatting in seconds
-            </h2>
-
-            <p className='mt-4 text-lg dark:text-gray-300 text-gray-600'>
-              Chatting with your PDF has never been easier.
-            </p>
-          </div>
-        </div> */}
-
+      <div className='mx-auto mb-32 max-w-5xl mt-5'>
         {/* Steps */}
 
         <ol className='my-8 space-y-6 max-md:px-5 pt-8 md:flex md:space-x-12 md:space-y-0'>
           <li className='md:flex-1'>
-            <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
+            <div className='flex flex-col space-y-2 border-l-2 sm:border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
               <span className='text-sm font-medium text-indigo-400'>
                 Step 1
               </span>
@@ -134,7 +120,7 @@ export default function Home() {
             </div>
           </li>
           <li className='md:flex-1'>
-            <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
+            <div className='flex flex-col space-y-2 border-l-2 sm:border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
               <span className='text-sm font-medium text-indigo-400'>
                 Step 2
               </span>
@@ -146,7 +132,7 @@ export default function Home() {
             </div>
           </li>
           <li className='md:flex-1'>
-            <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
+            <div className='flex flex-col space-y-2 border-l-2 sm:border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
               <span className='text-sm font-medium text-indigo-400'>
                 Step 3
               </span>
@@ -169,8 +155,8 @@ export default function Home() {
                 alt='uploading preview'
                 width={1419}
                 height={732}
-                quality={100}
-                className='rounded-md bg-white p-2 sm:p-8 md:p-20 shadow-2xl ring-1 ring-gray-900/10'
+                quality={75}
+                className='rounded-md  bg-white p-2 sm:p-8 md:p-20 shadow-2xl ring-1 ring-gray-900/10'
               />
             </div>
           </div>

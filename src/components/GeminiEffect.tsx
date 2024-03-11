@@ -32,7 +32,7 @@ export const GoogleGeminiEffect = ({
         {description || `Chatting with your PDF has never been easier.`}
       </p>
       <div className='w-full h-[890px] -top-60 md:-top-40 flex items-center justify-center bg-red-transparent absolute '>
-        <button className='border-2 border-indigo-500 dark:border-none bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-gray-950 dark:text-black text-xs  w-fit mx-auto '>
+        <button className='font-semibold border-2 border-indigo-500 dark:border-none bg-white rounded-full md:px-4 md:py-2 px-2 py-1 md:mt-24 mt-8 z-30 md:text-base text-gray-950 dark:text-black text-xs  w-fit mx-auto '>
           essence
         </button>
       </div>

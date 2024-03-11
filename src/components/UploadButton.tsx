@@ -50,12 +50,29 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
       noClick={true}
       noKeyboard={true}
       onDrop={async (acceptedFile) => {
+        if (acceptedFile.length === 0) {
+          return
+        }
+
+        const maxFileSizeInBytes = isSubscribed ? 16_000_000 : 4_000_000
+
+        if (acceptedFile[0]?.size > maxFileSizeInBytes) {
+          const maxSizeInMB = isSubscribed ? 16 : 4
+
+          setIsUploading(false)
+
+          return toast({
+            title: 'File too large',
+            description: `Please select a file smaller than ${maxSizeInMB} MB`,
+            variant: 'destructive',
+          })
+        }
+
         setIsUploading(true)
 
         const progressInterval = startSimulatedProgress()
 
         const res = await startUpload(acceptedFile)
-
         if (!res) {
           return toast({
             title: 'Something went wrong',
