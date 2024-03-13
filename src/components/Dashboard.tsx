@@ -7,7 +7,6 @@ import {
   ChevronRight,
   Ghost,
   Loader2,
-  MessageSquare,
   Plus,
   Trash,
 } from 'lucide-react'
@@ -77,20 +76,16 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
                   </div>
                 </Link>
 
-                <div className='px-6 mt-4 grid grid-cols-3 place-items-center py-2 gap-6 text-xs text-zinc-500'>
+                <div className='px-6 mt-4 flex place-items-center justify-between py-2 gap-6 text-xs text-zinc-500'>
                   <div className='flex items-center gap-2'>
                     <Plus className='h-4 w-4' />
                     {format(new Date(file.createdAt), 'MMM yyyy')}
                   </div>
 
-                  <div className='flex items-center gap-2'>
-                    <MessageSquare className='h-4 w-4' />
-                  </div>
-
                   <Button
                     onClick={() => deleteFile({ id: file.id })}
                     size='sm'
-                    className='w-full dark:bg-red-800 dark:hover:bg-red-700'
+                    className='px-8 dark:bg-red-800 dark:hover:bg-red-700'
                     variant='destructive'
                   >
                     {currentDeletingFile === file.id ? (
