@@ -22,10 +22,20 @@ export const appRouter = router({
     })
 
     if (!dbUser) {
-      await db.user.create({
+      const createdUser = await db.user.create({
         data: {
           id: user.id,
           email: user.email,
+        },
+      })
+
+      await db.file.create({
+        data: {
+          key: `d5d2bae5-52f3-4ef7-aed4-d9149a795955-19yku8-${createdUser.id}`,
+          name: '(Demo) Plato.pdf',
+          userId: createdUser.id,
+          url: 'https://utfs.io/f/d5d2bae5-52f3-4ef7-aed4-d9149a795955-19yku8.pdf',
+          uploadStatus: 'SUCCESS',
         },
       })
     }
