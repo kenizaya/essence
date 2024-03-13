@@ -79,8 +79,6 @@ const onUploadComplete = async ({
           id: createdFile.id,
         },
       })
-
-      throw new Error('LIMIT_EXCEEDED')
     }
 
     const embeddings = new OpenAIEmbeddings({
