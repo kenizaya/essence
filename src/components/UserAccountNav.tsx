@@ -95,7 +95,10 @@ const UserAccountNav = async ({
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem className='cursor-pointer hover:bg-gray-900/70'>
+        <DropdownMenuItem
+          asChild
+          className='cursor-pointer hover:bg-gray-900/70'
+        >
           <LogoutLink>Log out</LogoutLink>
         </DropdownMenuItem>
       </DropdownMenuContent>
