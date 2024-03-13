@@ -26,7 +26,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
       router.push(`/dashboard/${file.id}`)
     },
     retry: true,
-    retryDelay: 500,
+    retryDelay: 1000,
   })
 
   const startSimulatedProgress = () => {
@@ -40,7 +40,7 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
         }
         return prevProgress + 5
       })
-    }, 500)
+    }, 1000)
 
     return interval
   }
@@ -148,11 +148,16 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
                     className='h-1 w-full bg-zinc-200'
                   />
                   {uploadProgress === 100 ? (
-                    <div className='flex gap-1 items-center justify-center text-sm text-zinc-700 text-center pt-2'>
+                    <div className='flex gap-1 items-center justify-center text-sm dark:text-neutral-300 text-zinc-700 text-center pt-2'>
                       <Loader2 className='h-3 w-3 animate-spin' />
-                      Redirecting...
+                      Processing...
                     </div>
-                  ) : null}
+                  ) : (
+                    <div className='flex gap-1 items-center justify-center text-sm dark:text-neutral-300 text-zinc-700 text-center pt-2'>
+                      <Loader2 className='h-3 w-3 animate-spin' />
+                      Uploading
+                    </div>
+                  )}
                 </div>
               ) : null}
 

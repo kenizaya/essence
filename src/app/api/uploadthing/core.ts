@@ -31,13 +31,13 @@ const onUploadComplete = async ({
     url: string
   }
 }) => {
-  const fileExists = await db.file.findFirst({
-    where: {
-      key: file.key,
-    },
-  })
+  // const fileExists = await db.file.findFirst({
+  //   where: {
+  //     key: file.key,
+  //   },
+  // })
 
-  if (fileExists) return
+  // if (fileExists) return
 
   const createdFile = await db.file.create({
     data: {
