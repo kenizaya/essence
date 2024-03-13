@@ -2,7 +2,15 @@
 
 import { trpc } from '@/app/_trpc/client'
 import UploadButton from './UploadButton'
-import { Ghost, Loader2, MessageSquare, Plus, Trash } from 'lucide-react'
+import {
+  ChevronLeft,
+  ChevronRight,
+  Ghost,
+  Loader2,
+  MessageSquare,
+  Plus,
+  Trash,
+} from 'lucide-react'
 import Skeleton from 'react-loading-skeleton'
 import Link from 'next/link'
 import { format } from 'date-fns'
@@ -119,6 +127,16 @@ const Dashboard = ({ subscriptionPlan }: DashboardProps) => {
           <p className='dark:text-neutral-300'>
             Let&apos;s upload your first PDF.
           </p>
+          <Link
+            target='_blank'
+            href='https://drive.google.com/file/d/1BJDKPffdNLRhj_GAiHysMvQlWQ-Cqv7p/view?usp=sharing'
+          >
+            <Button className='text-indigo-400 text-lg' variant='link'>
+              <ChevronLeft size={18} />
+              Demo PDF
+              <ChevronRight size={18} />
+            </Button>
+          </Link>
         </div>
       )}
     </main>
