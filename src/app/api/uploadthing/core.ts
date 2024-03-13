@@ -7,7 +7,6 @@ import { SupabaseVectorStore } from 'langchain/vectorstores/supabase'
 import { supabaseClient } from '@/lib/supabase'
 import { getUserSubscriptionPlan } from '@/lib/stripe'
 import { PLANS } from '@/config/stripe'
-import { TRPCError } from '@trpc/server'
 
 const f = createUploadthing()
 
