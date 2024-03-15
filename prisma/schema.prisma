@@ -16,8 +16,8 @@ model User {
   email                  String    @unique
   stripeCustomerId       String?   @unique @map("stripe_customer_id")
   stripeSubscriptionId   String?   @unique @map("stripe_subscription_id")
-  stripePriceId          String?   @unique @map("stripe_price_id")
-  stripeCurrentPeriodEnd DateTime? @unique @map("stripe_current_period_end")
+  stripePriceId          String?   @map("stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map("stripe_current_period_end")
   File                   File[]
   Message                Message[]
 }

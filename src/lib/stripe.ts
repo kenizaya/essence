@@ -8,6 +8,8 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? '', {
   typescript: true,
 })
 
+const DAY_IN_MS = 86_400_000
+
 export async function getUserSubscriptionPlan() {
   const { getUser } = getKindeServerSession()
   const user = getUser()
@@ -38,8 +40,8 @@ export async function getUserSubscriptionPlan() {
 
   const isSubscribed = Boolean(
     dbUser.stripePriceId &&
-      dbUser.stripeCurrentPeriodEnd && // 86400000 = 1 day
-      dbUser.stripeCurrentPeriodEnd.getTime() + 86_400_000 > Date.now()
+      dbUser.stripeCurrentPeriodEnd &&
+      dbUser.stripeCurrentPeriodEnd.getTime() + DAY_IN_MS > Date.now()
   )
 
   const plan = isSubscribed
