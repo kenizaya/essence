@@ -199,12 +199,20 @@ const page = () => {
                         <Link
                           href={user ? '/dashboard' : '/sign-up'}
                           className={buttonVariants({
-                            className: 'w-full flex items-center',
+                            className: `w-full flex items-center ${
+                              user ? 'pointer-events-none aria-disabled' : ''
+                            }`,
                             variant: 'secondary',
                           })}
                         >
-                          {user ? 'Upgrade now' : 'Sign up'}
-                          <ArrowRight className='h-5 w-5 ml-1.5' />
+                          {user ? (
+                            'Current Plan'
+                          ) : (
+                            <>
+                              Sign up
+                              <ArrowRight className='h-5 w-5 ml-1.5' />
+                            </>
+                          )}
                         </Link>
                       ) : user ? (
                         <UpgradeButton />

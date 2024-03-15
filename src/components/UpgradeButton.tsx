@@ -4,6 +4,7 @@ import React from 'react'
 import { Button } from './ui/button'
 import { ArrowRight } from 'lucide-react'
 import { trpc } from '@/app/_trpc/client'
+import { getUserSubscriptionPlan } from '@/lib/stripe'
 
 const UpgradeButton = () => {
   const { mutate: createStripeSession } = trpc.createStripeSession.useMutation({
@@ -12,12 +13,30 @@ const UpgradeButton = () => {
     },
   })
 
+  const [isUserSubscribed, setIsUserSubscribed] = React.useState(false)
+
+  React.useEffect(() => {
+    const getUserSubscription = async () => {
+      const subscription = await getUserSubscriptionPlan()
+
+      setIsUserSubscribed(subscription.isSubscribed)
+    }
+  })
   return (
     <Button
       onClick={() => createStripeSession()}
-      className='w-full flex items-center'
+      className={`w-full flex items-center ${
+        isUserSubscribed ? 'disabled' : ''
+      }`}
     >
-      Upgrade Now <ArrowRight className='h-5 w-5 ml-1.5' />
+      {isUserSubscribed ? (
+        'Current Plan'
+      ) : (
+        <>
+          Upgrade Now
+          <ArrowRight className='h-5 w-5 ml-1.5' />
+        </>
+      )}
     </Button>
   )
 }
