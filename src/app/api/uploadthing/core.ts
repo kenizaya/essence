@@ -7,6 +7,7 @@ import { SupabaseVectorStore } from 'langchain/vectorstores/supabase'
 import { supabaseClient } from '@/lib/supabase'
 import { getUserSubscriptionPlan } from '@/lib/stripe'
 import { PLANS } from '@/config/stripe'
+import { TRPCError } from '@trpc/server'
 
 const f = createUploadthing()
 
@@ -71,13 +72,9 @@ const onUploadComplete = async ({
       PLANS.find((plan) => plan.name.toLowerCase() === 'free')!.pagesPerPdf
 
     if ((isSubscribed && isProExceeded) || (!isSubscribed && isFreeExceeded)) {
-      await db.file.update({
-        data: {
-          uploadStatus: 'FAILED',
-        },
-        where: {
-          id: createdFile.id,
-        },
+      throw new TRPCError({
+        code: 'PAYLOAD_TOO_LARGE',
+        message: 'Please upgrade your plan',
       })
     }
 
