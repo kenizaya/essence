@@ -105,12 +105,12 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
           {...getRootProps()}
           className='border h-64 m-4 border-dashed border-gray-300 dark:border-solid dark:hover:border-indigo-500 dark:border-2 hover:transition-all duration-150 ease-out dark:border-gray-500 rounded-lg'
         >
-          <DialogClose
+          {/* <DialogClose
             disabled={isUploading}
             className='absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground'
           >
             <X className='h-4 w-4' />
-          </DialogClose>
+          </DialogClose> */}
           <div className='flex items-center justify-center h-full w-full'>
             <label
               htmlFor='dropzone-file'
@@ -189,10 +189,7 @@ const UploadButton = ({ isSubscribed }: { isSubscribed: boolean }) => {
         <Button>Upload PDF</Button>
       </DialogTrigger>
 
-      <DialogContent
-        hideCloseButton
-        onInteractOutside={(e) => e.preventDefault()}
-      >
+      <DialogContent onInteractOutside={(e) => e.preventDefault()}>
         <UploadDropzone isSubscribed={isSubscribed} />
       </DialogContent>
     </Dialog>
