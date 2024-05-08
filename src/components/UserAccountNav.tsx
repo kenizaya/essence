@@ -33,7 +33,7 @@ const UserAccountNav = async ({
     <DropdownMenu>
       <DropdownMenuTrigger asChild className='overflow-visible'>
         <Button className='rounded-full h-8 w-8 aspect-square bg-slate-400'>
-          <Avatar className='relative w-8 h-8'>
+          <Avatar className='dark:border-neutral-300 relative w-8 h-8'>
             {imageUrl ? (
               <div className='relative aspect-square h-full w-full'>
                 <Image
@@ -46,7 +46,7 @@ const UserAccountNav = async ({
             ) : (
               <AvatarFallback>
                 <span className='sr-only'>{name}</span>
-                <Icons.user className='h-4 w-4 text-zinc-900' />
+                <Icons.user className='h-4 w-4 dark:fill-neutral-300 text-zinc-900' />
               </AvatarFallback>
             )}
           </Avatar>
